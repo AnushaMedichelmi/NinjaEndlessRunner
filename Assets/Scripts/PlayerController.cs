@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,8 +14,8 @@ public class PlayerController : MonoBehaviour
     public float playerJumpForce;
     public float playerSpeed;
     float inputX;
-    // public Button quit;
-    // public Button restart;
+     public Button quit;
+    public Button playagain;
     public Text ScoreText;
     ScoreCalculator calculator;
     void Start()
@@ -21,9 +23,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
-        //quit.onClick.AddListener(QuitTheGame);
-        // restart.onClick.AddListener(RestartTheGame);
-        calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
+        quit.onClick.AddListener(QuitTheGame);
+         playagain.onClick.AddListener(RestartTheGame);
+       // calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
     }
 
     // Update is called once per frame
@@ -62,14 +64,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Coins")
         {
             Destroy(collision.gameObject);
-            // calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
+             calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
             calculator.Score(5);
             ScoreText.text = "Score: " + calculator.score;
         }
     }
    
 
-   /* private void RestartTheGame()
+   private void RestartTheGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
     private void QuitTheGame()
     {
         SceneManager.LoadScene(0);
-    }*/
+    }
 
 
 }
