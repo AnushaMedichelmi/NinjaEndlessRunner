@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class PlayerController : MonoBehaviour
     public float playerJumpForce;
     public float playerSpeed;
     float inputX;
+    // public Button quit;
+    // public Button restart;
+    public Text ScoreText;
+    ScoreCalculator calculator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
+        //quit.onClick.AddListener(QuitTheGame);
+        // restart.onClick.AddListener(RestartTheGame);
+        calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
     }
 
     // Update is called once per frame
@@ -27,11 +35,11 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("IsJumping");
             rb.AddForce(Vector2.up * playerJumpForce);
         }
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             animator.SetTrigger("IsAttacking");
         }
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             animator.SetTrigger("IsSliding");
         }
@@ -43,9 +51,34 @@ public class PlayerController : MonoBehaviour
             render.flipX = false;
         else if (inputX < 0)
             render.flipX = true;
-            
+
+
+
         //Need to do running part
     }
-    
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Coins")
+        {
+            Destroy(collision.gameObject);
+            // calculator = GameObject.Find("ScoreCalculator").GetComponent<ScoreCalculator>();
+            calculator.Score(5);
+            ScoreText.text = "Score: " + calculator.score;
+        }
+    }
+   
+
+   /* private void RestartTheGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void QuitTheGame()
+    {
+        SceneManager.LoadScene(0);
+    }*/
+
+
 }
+

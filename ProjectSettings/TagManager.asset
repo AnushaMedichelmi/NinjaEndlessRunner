@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Coins
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
     locked: 0
   - name: Environment
     uniqueID: 1053173937
+    locked: 0
+  - name: foreground
+    uniqueID: 794928055
+    locked: 0
+  - name: Background
+    uniqueID: 969411541
     locked: 0
