@@ -10,7 +10,7 @@ public class ScoreCalculator : MonoBehaviour
     public void Score(int scoreValue)
     {
         score = score + scoreValue;
-        if(score == 30 )
+        if(score > 30 )
         {
             winPage.SetActive(true);
 
